@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUISampleApp.MainPage"
+             xmlns:local="clr-namespace:MAUISampleApp.ViewModels;assembly=MAUISampleApp"
+             xmlns:controls="clr-namespace:MAUISampleApp.Controls">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+     <Grid RowDefinitions="0.5*,8*,1.5*">
+            <Label
+                FontSize="32"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Text="WebView Sample" />
+
+            <controls:HybridWebView
+                Grid.Row="1"
+                x:Name="MyWebView"
+                Margin="10,0,10,0"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="Fill"
+                Source="http://localhost:5233/"
+                Command="{Binding WebViewCommand}" CommandParameter="{x:Reference MyWebView}"/>
+            <!--Source="{Binding Source}"  Source="http://localhost:5162/"-->
+
+        <VerticalStackLayout
+                Grid.Row="2"
+                Margin="10,0,10,0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand">
+            <Entry x:Name="Latitude" Placeholder="Enter Latitude" Text="{Binding Coordinates.Latitude}"/>
+            <Entry x:Name="Longitude" Placeholder="Enter Longitude" Text="{Binding Coordinates.Longitude}"/>
+            <Button Text="Send Location Co-ordinates to WebView" Command="{Binding SendCoordinatesToWebView}" CommandParameter="{x:Reference MyWebView}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
+
